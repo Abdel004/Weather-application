@@ -11,6 +11,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
+////////////////////////////////////////////////////////////////
+const auth= require('./signIn/auth.routes');
+app.use(express.json());
+app.use('/api/auth',auth);
+
+
 mongoose.connect("mongodb+srv://stu096:p411402-@csci2720.m2qbq.mongodb.net/stu096", (err) => {
   if (err) {
     console.log("database encountered the following error: %s", err);
@@ -18,6 +24,9 @@ mongoose.connect("mongodb+srv://stu096:p411402-@csci2720.m2qbq.mongodb.net/stu09
     console.log("Connected to the Database");
   }
 });
+
+
+
 
 
 // logout for admin and user
