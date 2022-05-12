@@ -10,6 +10,7 @@ const LocationSchema = new Schema({
         userId: { type: Schema.Types.ObjectId, required: true, ref: "User" },
         comment: { type: String, required: true }
     }],
+    last_updated: {type: String},
     temp_c: { type: Schema.Types.Decimal128 },
     wind_kph: { type: Schema.Types.Decimal128 },
     wind_dir: { type: String },
