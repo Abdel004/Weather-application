@@ -1,11 +1,11 @@
 const express= require ('express');
 const { route } = require('express/lib/application');
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const router= express.Router();
 const userSchema=require("../models/User");
-const adminSchema=require("../models/Admin");
+// const adminSchema=require("../models/Admin");
 //const authorize = require('../middleware/auth');
 
 //User sign in
@@ -32,9 +32,10 @@ router.post('/signin-user', (req, res, next) => {
 //Admin sign in
   router.post('/signin-admin', (req, res, next) => {
     let getAdmin;
-    adminSchema
+    userSchema
       .findOne({
         userName: req.body.userName,
+        role: "admin"
       },(err,result)=>{
         if (result==null) {
             return res.status(401).json({
@@ -146,6 +147,7 @@ router.post('/register-user',
           console.log("password is: ", req.body.password)
           const user = new userSchema({
             userName: req.body.userName,
+            role: "user",
             password: hash,
           });
 
@@ -172,8 +174,9 @@ router.post('/register-admin',
         bcrypt.hash(req.body.password, 10).then((hash) => {
         //  console.log("admin name is: ", req.body.userName)
          // console.log("admin password is: ", req.body.password)
-          const admin = new adminSchema({
+          const admin = new userSchema({
             userName: req.body.userName,
+            role: "admin",
             password: hash,
           });
 

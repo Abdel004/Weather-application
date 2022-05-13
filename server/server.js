@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const adminRefresh = require('./refreshData');
+const getLocations = require("./userLocationData");
+const adminLocationData = require("./adminLocationData");
 
 
 const app = express()
@@ -40,7 +42,9 @@ app.get('/logout', (req, res) => {
 
 
 //Admin refresh data
+app.post("/newLocation", adminLocationData.register)
 app.get('/refreshData', adminRefresh.refreshData)
+app.get('/locations', getLocations.getAllLocations)
 
 app.listen(5000, () => {
   console.log(`Connected to http://localhost:5000`)

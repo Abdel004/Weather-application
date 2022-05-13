@@ -1,5 +1,5 @@
 // FOR LOCATION DATA
-
+const LocationSchema = require("./models/Location");
 
 //CREATE LATLONG and NAME
 const register = (req, res, next) => {
