@@ -45,6 +45,7 @@ app.get('/logout', (req, res) => {
 app.post("/newLocation", adminLocationData.register)
 app.get('/refreshData', adminRefresh.refreshData)
 app.get('/locations', getLocations.getAllLocations)
+app.post('/location/:name', getLocations.getLocation)
 
 app.listen(5000, () => {
   console.log(`Connected to http://localhost:5000`)

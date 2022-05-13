@@ -2,7 +2,7 @@ const Location = require('./models/Location');
 
 // for one single location
 const getLocation = (req, res) => {
-  Location.findOne({ name: { $regex: req.body.name } })
+  Location.findOne({ name: { $regex: req.params['name'], '$options' : 'i'} })
     .then(response => {
       res.json({ response })
     }).catch(err => {

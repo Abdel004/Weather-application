@@ -1,44 +1,52 @@
-import React, { Component } from 'react';
+import { useEffect, useState } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 
 
 const mapStyles = {
-    width: '100%',
-    height: '60%'
+    width: '50%',
+    height: '100%'
 };
 
-export class MapContainer extends Component {
+const MapContainer = (props) => {
 
-    state = {
-        showingInfoWindow: false,  // Hides or shows the InfoWindow
-        activeMarker: {},          // Shows the active marker upon click
-        selectedPlace: {}         // Shows the InfoWindow to the selected place upon a marker
-    };
+    const [markers, setMarkers] = useState([])
+    const [zoom, setZoom] = useState(2)
+    
+    useEffect(() => {
+        if (!props.multipleLocations) {
+            fetch("/locations/", { method: 'GET' })
+                .then(response => response.json())
+                .then(data => setMarkers(data.response))
+        } else {
+            fetch(`/location/${props.name}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => setMarkers([data.response]))
+                setZoom(10)
+        }
 
-    render() {
-        return (
-            <Map
-                google={this.props.google}
-                zoom={2}
-                style={mapStyles}
-                initialCenter={
-                    {
-                        lat: 22.28,
-                        lng: 114.15
-                    }
+    }, [props.multipleLocations, props.name])
+    
+    return (
+        <Map
+            google={props.google}
+            zoom={zoom}
+            style={mapStyles}
+            initialCenter={
+                {
+                    lat: 22.28,
+                    lng: 114.15
                 }
-            >
-                {this.props.markers.map((loc, i) =>
-                    <Marker
-                        key={i}
-                        onClick={() => console.log(loc.name)} // rerouting logic here
-                        position={{lat: loc.latitude, lng: loc.longitude}}
-                    />
-                )}
-            </Map>
-        );
-    }
-
+            }
+        >
+            {markers ? markers.map((loc, i) =>
+                <Marker
+                    key={i}
+                    onClick={() => console.log(loc.name)} // rerouting logic here
+                    position={{ lat: loc.latitude, lng: loc.longitude }}
+                />
+            ) : null}
+        </Map>
+    )
 }
 
 export default GoogleApiWrapper({
