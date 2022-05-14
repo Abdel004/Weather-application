@@ -6,18 +6,15 @@ const cors = require('cors');
 const adminRefresh = require('./refreshData');
 const getLocations = require("./userLocationData");
 const adminLocationData = require("./adminLocationData");
-
+//////////////////////////////////////////////////////
+const locFunctions=require('./FavouritesAndSearch.js');
+const signInandUp=require('./signIn.js');
 
 const app = express()
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
-
-////////////////////////////////////////////////////////////////
-const auth= require('./signIn/auth.routes');
 app.use(express.json());
-app.use('/api/auth',auth);
-
 
 mongoose.connect("mongodb+srv://stu096:p411402-@csci2720.m2qbq.mongodb.net/stu096", (err) => {
   if (err) {
@@ -46,6 +43,15 @@ app.post("/newLocation", adminLocationData.register)
 app.get('/refreshData', adminRefresh.refreshData)
 app.get('/locations', getLocations.getAllLocations)
 app.post('/location/:name', getLocations.getLocation)
+
+//Functions in signIn File
+app.post('/signin-user',signInandUp.signIn);
+app.post('/signup-user',signInandUp.signUp);
+
+//Functions in FavouritesAndSearch File
+app.post('/keywordlocation',locFunctions.keywordLocation);
+app.get('/favourites/:name/:loc',locFunctions.addFavourites);
+app.get('/favourites/:userName',locFunctions.listFavourites);
 
 app.listen(5000, () => {
   console.log(`Connected to http://localhost:5000`)
