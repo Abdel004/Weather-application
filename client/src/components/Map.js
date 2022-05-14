@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const containerStyle = {
@@ -11,24 +13,19 @@ const center = {
     lng: -38.523
 };
 
-const MapContainer = (props) => {
-
+const MapContainer = () => {
+    let navigate = useNavigate();
     const [markers, setMarkers] = useState([])
-    const [zoom, setZoom] = useState(2)
-    
+
     useEffect(() => {
-        if (!props.multipleLocations) {
             fetch("/locations/", { method: 'GET' })
                 .then(response => response.json())
                 .then(data => setMarkers(data.response))
-        } else {
-            fetch(`/location/${props.name}`, { method: 'POST' })
-                .then(response => response.json())
-                .then(data => setMarkers([data.response]))
-            setZoom(10)
-        }
+    }, [])
 
-    }, [props.multipleLocations, props.name])
+    const handleClick = (name) => {
+        navigate(`/map/${name}`) // edit link to go to main component
+    }
 
     return (
         <LoadScript
@@ -37,12 +34,12 @@ const MapContainer = (props) => {
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
-                zoom={zoom}
+                zoom={2}
             >
                 {markers ? markers.map((loc, i) =>
                     <Marker
                         key={i}
-                        onClick={() => console.log(loc.name)} // rerouting logic here
+                        onClick={() => handleClick(loc.name)}
                         position={{ lat: loc.latitude, lng: loc.longitude }}
                     />
                 ) : null}

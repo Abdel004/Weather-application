@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import "../css/login.css";
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 
 function LogIn({ createCookie }) {
-
+    let navigate = useNavigate();
     const [values, setValues] = useState({
         username: '',
         password: '',
         error: ''
     });
+
+    const changeLoc = () => {
+        navigate("/map") // add user view
+    }
 
     function handleSubmit(event) {
 
@@ -22,6 +25,7 @@ function LogIn({ createCookie }) {
             }).then(
                 response => {
                     createCookie(response.data.message)
+                    changeLoc()
                 },
                 error => {
                     setValues(rest => {
