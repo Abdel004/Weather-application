@@ -24,7 +24,10 @@ const signIn=(req,res)=> {
       bcrypt.compare(req.body.password, result.password,(err,ress)=>{
           if (err) return res.status(401).json({error: err})
           if (!ress) return  res.status(401).json({message: 'Invalid password.'});
-          else return res.status(200).json({message: getUser})
+           else {
+            res.cookie("user",{name: getUser.userName, role:getUser.role});
+            return res.status(200).json({message: getUser})
+        }
       });
     });
   };
