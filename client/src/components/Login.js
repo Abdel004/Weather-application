@@ -14,7 +14,7 @@ function LogIn({ storeToken }) {
     function handleSubmit(event) {
 
         event.preventDefault();
-        axios.post('http://localhost:3000/signin-user',
+        axios.post('http://localhost:3000/signin-user/user',
             {
                 name: values.username,
                 password: values.password
