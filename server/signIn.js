@@ -1,6 +1,5 @@
 const express= require ('express');
 const { route } = require('express/lib/application');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const router= express.Router();
@@ -13,7 +12,6 @@ const signIn=(req,res)=> {
   userSchema
     .findOne({
       userName: req.body.userName,
-      role:req.params['role'],
     },(err,result)=>{
       if (result==null) {
           return res.status(401).json({
@@ -25,7 +23,6 @@ const signIn=(req,res)=> {
           if (err) return res.status(401).json({error: err})
           if (!ress) return  res.status(401).json({message: 'Invalid password.'});
            else {
-            res.cookie("user",{name: getUser.userName, role:getUser.role});
             return res.status(200).json({message: getUser})
         }
       });

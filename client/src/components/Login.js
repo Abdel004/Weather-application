@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import "../css/login.css";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
-function LogIn({ storeToken }) {
+function LogIn({ createCookie }) {
 
     const [values, setValues] = useState({
         username: '',
@@ -14,13 +15,13 @@ function LogIn({ storeToken }) {
     function handleSubmit(event) {
 
         event.preventDefault();
-        axios.post('http://localhost:3000/signin-user/user',
+        axios.post('/signin-user/user',
             {
-                name: values.username,
+                userName: values.username,
                 password: values.password
             }).then(
                 response => {
-                    storeToken(response);
+                    createCookie(response.data.message)
                 },
                 error => {
                     setValues(rest => {
@@ -45,11 +46,11 @@ function LogIn({ storeToken }) {
     }
 
     return (
-      <div className="form-container">
-        <div className="title-box"><h1>Weathering with Me</h1></div>
-          <div class="login-box">
-            <h1>USER LOGIN</h1>
-          </div>
+        <div className="form-container">
+            <div className="title-box"><h1>Weathering with Me</h1></div>
+            <div className="login-box">
+                <h1>USER LOGIN</h1>
+            </div>
 
             <form method="post" onSubmit={handleSubmit}>
                 <div className="mb-4">
@@ -78,13 +79,11 @@ function LogIn({ storeToken }) {
                 <button type="submit" className="btn btn-primary btn-lg">Login</button>
 
             </form>
-            <p>New user?</p>
-            <a href="/register"><button type="button" className="btn btn-primary btn-lg">Register</button></a>
 
-        <br></br>
-        <br></br>
-        <footer><p>If you are an administrator, please login <a href="/login-admin">here</a>.</p></footer>
-      </div>
+            <br></br>
+            <br></br>
+            <footer><p>If you are an administrator, please login <Link to="/login-admin">here</Link>.</p></footer>
+        </div>
 
     )
 }

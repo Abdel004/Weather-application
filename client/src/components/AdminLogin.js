@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import "../css/login.css";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-function AdminLogIn({ storeToken }) {
+function AdminLogIn({ createCookie }) {
 
     const [values, setValues] = useState({
         username: '',
@@ -13,13 +14,13 @@ function AdminLogIn({ storeToken }) {
     function handleSubmit(event) {
 
         event.preventDefault();
-        axios.post('http://localhost:3000/signin-user/admin',
+        axios.post('/signin-user/admin',
             {
-                name: values.username,
+                userName: values.username,
                 password: values.password
             }).then(
                 response => {
-                    storeToken(response);
+                    createCookie(response.data.message)
                 },
                 error => {
                     setValues(rest => {
@@ -46,7 +47,7 @@ function AdminLogIn({ storeToken }) {
     return (
       <div className="form-container">
         <div className="title-box"><h1>Weathering with Me</h1></div>
-          <div class="login-box">
+          <div className="login-box">
             <h1>ADMIN LOGIN</h1>
           </div>
 
@@ -77,8 +78,8 @@ function AdminLogIn({ storeToken }) {
                 <button type="submit" className="btn btn-primary btn-lg">Login</button>
 
             </form>
-            <div class="admin-box">
-              <p>This page is for authorised access only.<br></br> If you are a user, please login <a href="/login">here</a>.</p>
+            <div className="admin-box">
+              <p>This page is for authorised access only.<br></br> If you are a user, please login <Link to="/">here</Link>.</p>
             </div>
 
       </div>
