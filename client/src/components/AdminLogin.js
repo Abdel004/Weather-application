@@ -13,7 +13,7 @@ function AdminLogIn({ storeToken }) {
     function handleSubmit(event) {
 
         event.preventDefault();
-        axios.post('http://localhost:3000/signin-admin',
+        axios.post('http://localhost:3000/signin-user/admin',
             {
                 name: values.username,
                 password: values.password
