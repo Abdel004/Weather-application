@@ -17,6 +17,7 @@ function LogIn({ createCookie }) {
 
     function handleSubmit(event) {
 
+        //User Sign-in
         event.preventDefault();
         axios.post('/signin-user/user',
             {
