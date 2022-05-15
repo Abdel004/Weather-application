@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import styles from "./login.module.css";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 function AdminLogin({ createCookie, changeView }) {
-    let navigate = useNavigate();
+
     const [values, setValues] = useState({
         username: '',
         password: '',
@@ -95,7 +94,7 @@ function AdminLogin({ createCookie, changeView }) {
 
 
 function UserLogin({ createCookie, changeView }) {
-    let navigate = useNavigate();
+
     const [values, setValues] = useState({
         username: '',
         password: '',
@@ -105,7 +104,7 @@ function UserLogin({ createCookie, changeView }) {
     const changeLoc = async (response) => {
         await createCookie(response.data.message)
         await fetch("/refreshData", { method: "GET" })
-        navigate("/map", { replace: true }) // add user view
+        .then(() => window.location.href = '/user/home')
     }
 
     function handleSubmit(event) {

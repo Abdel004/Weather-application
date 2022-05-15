@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 //Get Locations
 
 function LocationsTable(props) {
-    const [value, setValue] = useState([]);
     const [data, setData] = useState([]);
     const [favs, setFavs] = useState([])
     const [refresh, setRefresh] = useState(false)
@@ -56,7 +55,6 @@ function LocationsTable(props) {
             s_data[min] = temp;
         }
         setData(s_data);
-        setValue("temp_c");
     }
 
     //Sort by humidity using Bubble Sort
@@ -74,7 +72,6 @@ function LocationsTable(props) {
             s_data[min] = temp;
         }
         setData(s_data);
-        setValue("humidity");
     }
 
     return (

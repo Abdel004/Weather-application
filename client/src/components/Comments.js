@@ -20,7 +20,7 @@ function Comments(props) {
         axios.post("/newComment",
             {
                 name: props.name,
-                userName: props.userName,
+                userName: props.username,
                 comment: newComment
             }).then(() => {
                 setRefresh(old => !old)
