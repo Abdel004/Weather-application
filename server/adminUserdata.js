@@ -1,23 +1,4 @@
-// const { response } = require('express')
-// const User = require('../models/User')
-// const bcrypt = require('bcryptjs')
-// const jwt =  require('jsonwebtoken')
-// const { append } = require('express/lib/response')
-// // app.set('view engine', 'jade').
-// const bodyParser = require('body-parser');
-// const express = require('express')
-// const { handle } = require('express/lib/application')
-// const { header } = require('express/lib/request')
-// const { any } = require('../middleware/upload')
 
-
-
-// const app = express();
-// // support parsing of application/json type post data
-// app.use(bodyParser.json())
-
-// //support parsing of application/x-www-form-urlencoded post data
-// app.use(bodyParser.urlencoded({extended:true}))
 
 
 // FOR USER DATA
