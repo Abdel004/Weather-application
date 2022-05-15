@@ -3,7 +3,6 @@ import axios from 'axios';
 import styles from "./table.module.css";
 
 //Get Locations
-let gloVar;
 
 function LocationsTable(props) {
     const [value, setValue] = useState([]);
