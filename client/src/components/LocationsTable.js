@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styles from "./table.module.css";
 
 //Get Locations
-function LocationsTable() {
+function LocationsTable(props) {
     const [value, setValue] = useState([]);
     const [data, setData] = useState([]);
 
@@ -16,10 +17,19 @@ function LocationsTable() {
             <td>{data.name}</td>
             <td>{data.temp_c}</td>
             <td>{data.humidity}</td>
+            <td>{data.last_updated}</td>
+            <td><button type="button" className={`btn btn-primary`} onClick={addFavourite}>Add Favourite</button></td>
         </tr>
     );
 
-//Sort temperature using Bubble Sort
+    function addFavourite(data) {
+        fetch(`/favourites/${props.username}/${data}`)
+            .then(res => res.json())
+            .then(res => console.log(res))
+            // .then(console.log(data))
+    }
+
+    //Sort by temperature using Bubble Sort
     function tempSort() {
         const s_data = data;
         for(let i = 0; i < s_data.length; i++)
@@ -40,7 +50,7 @@ function LocationsTable() {
         setValue("temp_c");
     }
 
-//Sort humidity using Bubble Sort
+    //Sort by humidity using Bubble Sort
     function humiditySort() {
         const s_data = data;
         for(let i = 0; i < s_data.length; i++)
@@ -63,14 +73,20 @@ function LocationsTable() {
 
     return (
         <div className="container">
-            <button type="button" className="btn btn-primary btn-lg" onClick={tempSort}>Temperature</button>
-            <button type="button" className="btn btn-primary btn-lg" onClick={humiditySort}>Humidity</button>
+            <div className={styles.sortbox}>
+                <h2 className={styles.sortboxpara}>Locations</h2>
+                Sort by:
+                <button type="button" className={`btn btn-primary btn-lg ${styles.btn2}`} onClick={tempSort}>Temperature</button>
+                <button type="button" className={`btn btn-primary btn-lg ${styles.btn2}`} onClick={humiditySort}>Humidity</button>
+            </div>
             <table className="table table-dark">
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Temperature</th>
                         <th scope="col">Humidity</th>
+                        <th scope="col">Last Updated</th>
+                        <th scope="col">Add to Favourite</th>
                     </tr>
                 </thead>
                 <tbody>
