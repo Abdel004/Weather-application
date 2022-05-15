@@ -81,7 +81,7 @@ function AdminLogIn({ createCookie }) {
                     {values.error && <p>{values.error}</p>}
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-lg">Login</button>
+                <button type="submit" className={`btn btn-primary btn-lg ${styles.btn}`}>Login</button>
 
             </form>
             <div className={styles.adminbox}>
