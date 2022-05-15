@@ -7,7 +7,7 @@ import EditUser from "./components/EditUser";
 import FavLocations from "./components/FavLocations";
 import LocationsTable from "./components/LocationsTable";
 import EditLocation from "./components/EditLocation";
-import Search from "./components/search";
+import Search from "./components/Search";
 import Refresh from "./components/Refresh";
 import AdminNav from "./components/AdminNav";
 import UserNav from "./components/UserNav";
