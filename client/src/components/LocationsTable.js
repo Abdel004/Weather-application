@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+//Get Locations
 function LocationsTable() {
     const [value, setValue] = useState([]);
     const [data, setData] = useState([]);
@@ -18,6 +19,7 @@ function LocationsTable() {
         </tr>
     );
 
+//Sort temperature using Bubble Sort
     function tempSort() {
         const s_data = data;
         for(let i = 0; i < s_data.length; i++)
@@ -38,6 +40,7 @@ function LocationsTable() {
         setValue("temp_c");
     }
 
+//Sort humidity using Bubble Sort
     function humiditySort() {
         const s_data = data;
         for(let i = 0; i < s_data.length; i++)
