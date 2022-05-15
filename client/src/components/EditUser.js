@@ -3,7 +3,7 @@ import styles from "./Edit.module.css";
 import axios from 'axios';
 
 
-function Edit() {
+function EditUser() {
   const [values, setValues] = useState({
     pwd: '',
     username: '',
@@ -109,9 +109,9 @@ function Edit() {
         return (
           <div key={key} className={styles.user}>
             <h1>{val.userName}</h1>
-            <input className={styles.put} type="text" placeholder="New User Name" value={newValues.username} name="newUserName"
+            <input className={styles.put} type="text" placeholder="New User Name" name="newUserName"
               onChange={handleChange}></input>
-            <input className={styles.put} type="text" placeholder="New Password" value={newValues.password} name="newPwd"
+            <input className={styles.put} type="text" placeholder="New Password"  name="newPwd"
               onChange={handleChange}></input>
             {newValues.oldUserName === val.userName && newValues.error && <p className={styles.error}>{newValues.error}</p>}
             <button className={styles.btn} onClick={() => updateUserName(val.userName)}> Update </button>
@@ -122,4 +122,4 @@ function Edit() {
   );
 }
 
-export default Edit;
+export default EditUser;

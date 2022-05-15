@@ -34,7 +34,7 @@ app.post('/location/:name', getLocations.getLocation)
 app.post("/newLocation", adminLocationData.register)
 app.get("/allLocation", adminLocationData.index)
 app.post("/updateLocation", adminLocationData.update)
-app.post("/deleteLocation", adminLocationData.destroy)
+app.delete("/deleteLocation", adminLocationData.destroy)
 
 //ADMIN CRUD OPERATIONS ON USER DATA
 app.post("/newUser", adminUserData.register)
