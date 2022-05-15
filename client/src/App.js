@@ -9,8 +9,8 @@ import LocationsTable from "./components/LocationsTable";
 import EditLocation from "./components/EditLocation";
 import Search from "./components/search";
 import Comments from "./components/Comments";
-import AdminHome from "./components/AdminHome";
 import Refresh from "./components/Refresh";
+import UserNav from "./components/UserNav";
 
 const cookies = new Cookies();
 
@@ -29,18 +29,24 @@ function removeCookies() {
 //Route to different API calls.
 function App() {
   let userName = cookies.get('userName')
-  let role = cookies.get('role')
+
+  if (window.location.pathname === '/logout') {
+    console.log("signing out");
+    cookies.remove('userName', { path: '/' });
+    cookies.remove('role', { path: '/' });
+    window.location.href = '/';
+  }
 
   return (
 
     <Routes>
       <Route path="/" element={<LogIn createCookie={createCookie} />} />
-      <Route path="/admin/home" element={<AdminHome removeCookies={removeCookies} username={userName} />} />
-      {/* <Route path="/refresh/data" element={ } />  */}
-      <Route path="/edit/user" element={<AdminHome removeCookies={removeCookies} username={userName} />} />
-      <Route path="/edit/location" element={<AdminHome removeCookies={removeCookies} username={userName} />} />
-      <Route path="/edit/refresh" element={<Refresh />} />
-      <Route path="/map/:name" element={<MapLoc username={userName} />} />
+      <Route path="/admin/home" element={<UserNav removeCookies={removeCookies} username={userName} />} />
+      <Route path="/requests" element={<UserNav removeCookies={removeCookies} username={userName} children={<Refresh/>}/> } />
+      <Route path="/user" element={<UserNav removeCookies={removeCookies} username={userName} children={<EditUser/>} />} />
+      <Route path="/loc" element={<UserNav removeCookies={removeCookies} username={userName} children={<EditLocation/>} />} />
+      {/* <Route path="/edit/refresh" element={<Refresh />} />
+      <Route path="/map/:name" element={<MapLoc username={userName} />} /> */}
       {/* <Route path="/map" element={<Map />} />
         <Route path="/user-edit" element={<EditUser />} />
         <Route path="/fav" element={<FavLocations username={userName} />}></Route>

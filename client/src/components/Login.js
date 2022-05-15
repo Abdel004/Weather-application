@@ -13,8 +13,8 @@ function AdminLogin({ createCookie, changeView }) {
 
     const changeLoc = async (response) => {
         await createCookie(response.data.message)
-        fetch("/refreshData", { method: "GET" })
-            .then(() => navigate("/admin/home", { replace: true }))
+        await fetch("/refreshData", { method: "GET" })
+            .then(() => window.location.href = '/admin/home')
     }
 
     function handleSubmit(event) {
