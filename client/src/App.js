@@ -36,7 +36,7 @@ function App() {
         <Route path="/map/:name" element={<MapLoc />} />
         <Route path="/user-edit" element={<EditUser />} />
         <Route path="/fav" element={<FavLocations username={userName} />}></Route>
-        <Route path="/table" element={<LocationsTable />} />
+        <Route path="/table" element={<LocationsTable username={userName} />} />
         <Route path="/edit-location" element={<EditLocation />} />
       </Routes>
     </BrowserRouter>
