@@ -5,6 +5,7 @@ const cors = require('cors');
 const adminRefresh = require('./refreshData');
 const getLocations = require("./userLocationData");
 const adminLocationData = require("./adminLocationData");
+const adminUserData = require("./adminUserData");
 //////////////////////////////////////////////////////
 const locFunctions = require('./FavouritesAndSearch.js');
 const signInandUp = require('./signIn.js');
