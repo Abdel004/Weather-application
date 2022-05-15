@@ -55,6 +55,25 @@ const addFavourites=(req,res)=>{
         }) 
 }
 
+//Delete Favourite location
+const delFavourites=(req,res)=>{
+    console.log("entered addFavourites\n");
+    let username=req.params['name'];
+    let loc=req.params['loc'];
+   
+    console.log("first here");
+    UserSchema.findOneAndUpdate({userName: username},
+    {
+        $pull : {
+            favouriteLocations : loc
+        }
+            
+    },{new:true})
+    .then((doc)=>{
+        console.log(`doc is ${doc}`);
+        res.send(JSON.stringify(doc,null,2));
+        }) 
+}
    
 
 //List of all favourite locations of a particular user
@@ -80,5 +99,5 @@ const listFavourites=(req,res)=>{
     })
 }
 
-module.exports={keywordLocation,addFavourites,listFavourites};
+module.exports={keywordLocation,addFavourites,delFavourites,listFavourites};
    
