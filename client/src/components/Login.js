@@ -87,7 +87,7 @@ function LogIn({ createCookie }) {
 
             <br></br>
             <br></br>
-            <footer><p>If you are an administrator, please login <Link to="/login-admin">here</Link>.</p></footer>
+            <footer><p className={styles.adminbox}>If you are an administrator, please login <Link to="/login-admin">here</Link>.</p></footer>
         </div>
 
     )
