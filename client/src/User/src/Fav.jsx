@@ -4,8 +4,8 @@ class Favourite extends React.Component {
    render() {
       return (
       <div>
-          <h2>Favourites</h2>
-          <p> List all favourite locations of user.</p>
+          <h2 className = "check">Favourites</h2>
+          <p className = "check"> List all favourite locations of user.</p>
         </div>
       );
    }
