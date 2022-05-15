@@ -39,7 +39,7 @@ function App() {
         <Route path="/fav" element={<FavLocations username={userName} />}></Route>
         <Route path="/table" element={<LocationsTable username={userName} />} />
         <Route path="/edit-location" element={<EditLocation />} />
-        <Route path="/search" element={<Search />} />
+        <Route path="/search" element={<Search username={userName}/>} />
       </Routes>
     </BrowserRouter>
   );

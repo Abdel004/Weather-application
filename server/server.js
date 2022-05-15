@@ -28,7 +28,7 @@ mongoose.connect("mongodb+srv://stu110:p869132-@csci2720.m2qbq.mongodb.net/stu11
 app.post("/newLocation", adminLocationData.register)
 app.get('/refreshData', adminRefresh.refreshData)
 app.get('/locations', getLocations.getAllLocations)
-app.post('/location/:name', getLocations.getLocation)
+app.get('/location/:name', getLocations.getLocation)
 
 //ADMIN CRUD OPERATIONS ON LOCATION DATA
 app.post("/newLocation", adminLocationData.register)
@@ -50,6 +50,10 @@ app.post('/signup-user', signInandUp.signUp);
 app.post('/keywordlocation', locFunctions.keywordLocation);
 app.get('/favourites/:name/:loc', locFunctions.addFavourites);
 app.get('/favourites/:userName', locFunctions.listFavourites);
+
+
+app.get('/favs/:userName', locFunctions.getUserFavs)
+app.post('/newComment', getLocations.addComment)
 
 app.listen(5000, () => {
   console.log(`Connected to http://localhost:5000`)

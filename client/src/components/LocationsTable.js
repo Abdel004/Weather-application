@@ -1,38 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from "./table.module.css";
+import { Link } from 'react-router-dom';
 
 //Get Locations
 
 function LocationsTable(props) {
     const [value, setValue] = useState([]);
     const [data, setData] = useState([]);
+    const [favs, setFavs] = useState([])
+    const [refresh, setRefresh] = useState(false)
 
     useEffect(() => {
         axios.get("/locations")
-        .then(response => response.data ? setData(response.data.response) : [])
-    }, []);
-    console.log(data)
-    const displayList = data.map((data, i) =>
+            .then(response => response.data ? setData(response.data.response) : [])
+    }, [props.username])
+
+    useEffect(() => {
+        axios.get(`/favs/${props.username}`)
+            .then(response => response.data.map(item => setFavs(arr => [...arr, item])))
+    }, [props.username, refresh])
+
+    console.log(favs)
+    const handleClick = (item) => {
+        console.log(item)
+        fetch(`/favourites/${props.username}/${item.name}`).then(() => {
+            setFavs([])
+            setRefresh(ref => !ref)
+        })
+    }
+
+    const displayList = data.map((item, i) =>
         <tr key={i}>
-            <td>{data.name}</td>
-            <td>{data.temp_c}</td>
-            <td>{data.humidity}</td>
-            <td>{data.last_updated}</td>
-            <td><button type="button" className={`btn btn-primary`} onClick={() => fetch(`/favourites/${props.username}/${data.name}`)}>Add Favourite</button></td>
+            <td><Link to={`/map/${item.name}`}>{item.name}</Link></td>
+            <td>{item.temp_c}</td>
+            <td>{item.humidity}</td>
+            <td>{item.last_updated}</td>
+            {favs.includes(item.name) ? <td>Already in favourites</td> : <td><button type="button" className={`btn btn-primary`} onClick={() => handleClick(item)}>Add Favourite</button></td>}
         </tr>
     );
+
 
     //Sort by temperature using Bubble Sort
     function tempSort() {
         const s_data = data;
-        for(let i = 0; i < s_data.length; i++)
-        {
+        for (let i = 0; i < s_data.length; i++) {
             let min = i;
-            for(let j = i + 1; j < s_data.length; j++)
-            {
-                if(s_data[j].temp_c < s_data[min].temp_c)
-                {
+            for (let j = i + 1; j < s_data.length; j++) {
+                if (s_data[j].temp_c < s_data[min].temp_c) {
                     min = j;
                 }
             }
@@ -47,13 +62,10 @@ function LocationsTable(props) {
     //Sort by humidity using Bubble Sort
     function humiditySort() {
         const s_data = data;
-        for(let i = 0; i < s_data.length; i++)
-        {
+        for (let i = 0; i < s_data.length; i++) {
             let min = i;
-            for(let j = i + 1; j < s_data.length; j++)
-            {
-                if(s_data[j].humidity < s_data[min].humidity)
-                {
+            for (let j = i + 1; j < s_data.length; j++) {
+                if (s_data[j].humidity < s_data[min].humidity) {
                     min = j;
                 }
             }

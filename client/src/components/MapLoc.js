@@ -18,7 +18,7 @@ const MapLoc = () => {
     const [marker, setMarkers] = useState(null)
 
     useEffect(() => {
-        fetch(`/location/${name}`, { method: 'POST' })
+        fetch(`/location/${name}`, { method: 'GET' })
             .then(response => response.json())
             .then(data => setMarkers(data.response))
     }, [name])
