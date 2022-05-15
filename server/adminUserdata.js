@@ -1,4 +1,5 @@
 // FOR USER DATA
+const User = require("./models/User");
 
 
 //CREATE USER
@@ -29,7 +30,7 @@ const register = (req, res, next) => {
     })
 }
 
-// Show list of all users //ADMIN
+// Show list of all users 
 const index = (req, res, next) => {
     User.find()
     .then(response => {
