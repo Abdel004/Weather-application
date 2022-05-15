@@ -6,6 +6,7 @@ import Create from './components/Create';
 import Edit from './components/Edit';
 import Home from './components/Home';
 
+//Route to admin functions.
 function App() {
 return (
 	<div className='App'>
