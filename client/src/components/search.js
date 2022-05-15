@@ -3,6 +3,7 @@ import React,{useState, useEffect}  from 'react';
 import Axios from 'axios';
 import styles from "./search.module.css";
 
+//Search Location with keyword
 function Search() {
   const [searchTerm, setSearchTerm] = useState("")
   const[locationList, setLocations] = useState([])
