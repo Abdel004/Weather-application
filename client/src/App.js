@@ -11,16 +11,19 @@ import EditLocation from "./components/EditLocation";
 
 const cookies = new Cookies();
 
+//Set Cookies
 function createCookie(res) {
   cookies.set('userName', res.userName)
   cookies.set('role', res.role)
 }
 
+//Remove Cookies
 function removeCookies() {
   cookies.remove('userName')
   cookies.remove('role')
 }
 
+//Route to different API calls.
 function App() {
   let userName = cookies.get('userName')
   let role = cookies.get('role')
