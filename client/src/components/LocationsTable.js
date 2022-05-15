@@ -3,6 +3,8 @@ import axios from 'axios';
 import styles from "./table.module.css";
 
 //Get Locations
+let gloVar;
+
 function LocationsTable(props) {
     const [value, setValue] = useState([]);
     const [data, setData] = useState([]);
@@ -18,16 +20,9 @@ function LocationsTable(props) {
             <td>{data.temp_c}</td>
             <td>{data.humidity}</td>
             <td>{data.last_updated}</td>
-            <td><button type="button" className={`btn btn-primary`} onClick={addFavourite}>Add Favourite</button></td>
+            <td><button type="button" className={`btn btn-primary`} onClick={() => fetch(`/favourites/${props.username}/${data.name}`)}>Add Favourite</button></td>
         </tr>
     );
-
-    function addFavourite(data) {
-        fetch(`/favourites/${props.username}/${data}`)
-            .then(res => res.json())
-            .then(res => console.log(res))
-            // .then(console.log(data))
-    }
 
     //Sort by temperature using Bubble Sort
     function tempSort() {
