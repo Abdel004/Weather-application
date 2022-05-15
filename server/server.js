@@ -43,6 +43,18 @@ app.get('/refreshData', adminRefresh.refreshData)
 app.get('/locations', getLocations.getAllLocations)
 app.post('/location/:name', getLocations.getLocation)
 
+//ADMIN CRUD OPERATIONS ON LOCATION DATA
+app.post("/newLocation", adminLocationData.register)
+app.get("/allLocation", adminLocationData.index)
+app.post("/updateLocation", adminLocationData.update)
+app.post("/deleteLocation", adminLocationData.destroy)
+
+//ADMIN CRUD OPERATIONS ON USER DATA
+app.post("/newUser", adminUserData.register)
+app.get("/allUser", adminUserData.index)
+app.post("/updateUser", adminUserData.update)
+app.post("/deleteUser", adminUserData.destroy)
+
 //Functions in signIn File
 app.post('/signin-user/:role', signInandUp.signIn);
 app.post('/signup-user', signInandUp.signUp);
