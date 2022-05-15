@@ -1,26 +1,18 @@
-  body {
-    padding: 20px;
-    margin: 0;
-    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #3e3f3a;
-    background-color: #ffffff;
-  }
-  h1, h2, p, ul, li {
+
+  .check h1, h2, p, ul, li {
     font-family: Helvetica, Arial, sans-serif;
   }
-  ul.header li {
+  .check ul.header li {
     display: inline;
     list-style-type: none;
     margin: 0;
   }
-  ul.header {
+  .check ul.header {
     background-color: #333333;
     padding: 0;
     overflow: hidden;
   }
-  ul.header li a {
+  .check ul.header li a {
     color: #FFF;
     font-weight: bold;
     text-decoration: none;
