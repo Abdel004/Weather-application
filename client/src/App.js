@@ -1,7 +1,6 @@
 import LogIn from "./components/Login";
-import AdminLogin from "./components/AdminLogin";
 import Cookies from 'universal-cookie';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Map from "./components/Map";
 import MapLoc from "./components/MapLoc";
 import EditUser from "./components/EditUser";
@@ -10,6 +9,8 @@ import LocationsTable from "./components/LocationsTable";
 import EditLocation from "./components/EditLocation";
 import Search from "./components/search";
 import Comments from "./components/Comments";
+import AdminHome from "./components/AdminHome";
+import Refresh from "./components/Refresh";
 
 const cookies = new Cookies();
 
@@ -29,21 +30,26 @@ function removeCookies() {
 function App() {
   let userName = cookies.get('userName')
   let role = cookies.get('role')
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={userName && role === 'user' ? <Map /> : <LogIn createCookie={createCookie} />} />
-        <Route path="/login-admin" element={(userName && role === 'admin') ? <EditUser /> : <AdminLogin createCookie={createCookie} />} />
-        <Route path="/map" element={<Map />} />
-        <Route path="/map/:name" element={<MapLoc />} />
+
+    <Routes>
+      <Route path="/" element={<LogIn createCookie={createCookie} />} />
+      <Route path="/admin/home" element={<AdminHome removeCookies={removeCookies} username={userName} />} />
+      {/* <Route path="/refresh/data" element={ } />  */}
+      <Route path="/edit/user" element={<AdminHome removeCookies={removeCookies} username={userName} />} />
+      <Route path="/edit/location" element={<AdminHome removeCookies={removeCookies} username={userName} />} />
+      <Route path="/edit/refresh" element={<Refresh />} />
+      <Route path="/map/:name" element={<MapLoc username={userName} />} />
+      {/* <Route path="/map" element={<Map />} />
         <Route path="/user-edit" element={<EditUser />} />
         <Route path="/fav" element={<FavLocations username={userName} />}></Route>
         <Route path="/table" element={<LocationsTable username={userName} />} />
         <Route path="/edit-location" element={<EditLocation />} />
         <Route path="/search" element={<Search username={userName} />} />
-        <Route path="/comment" element={<Comments userName={userName} name={"London"} />} />
-      </Routes>
-    </BrowserRouter>
+        <Route path="/comment" element={<Comments userName={userName} name={"London"} />} /> */}
+    </Routes>
+
   );
 }
 

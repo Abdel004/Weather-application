@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { useParams } from 'react-router-dom';
+import Comments from './Comments';
 
 const containerStyle = {
     width: '100%',
@@ -12,7 +13,7 @@ const center = {
     lng: -38.523
 };
 
-const MapLoc = () => {
+const MapLoc = (props) => {
 
     let { name } = useParams()
     const [marker, setMarkers] = useState(null)
@@ -50,7 +51,7 @@ const MapLoc = () => {
             <table className="table table-dark">
                 <tbody>
                 <tr > 
-                    <th> Location </th>
+                    <th> Attribute </th>
                     <th> Attribute Value</th>
                 </tr>
                 <tr >
@@ -96,6 +97,7 @@ const MapLoc = () => {
                 </tbody>
             </table>
             </div> 
+            <Comments username={props.username} name={check.name}/>
     </div>
     )
 }
