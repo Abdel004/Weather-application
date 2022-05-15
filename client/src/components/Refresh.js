@@ -4,14 +4,17 @@ import styles from "./Edit.module.css";
 
 function Refresh() {
   const [locList, setlocList] = useState([])
+  const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
-    Axios.get("/refreshData").then(() =>
-      fetch("/locations/", { method: 'GET' })
-        .then(response => response.json())
-        .then(data => setlocList(data.response)))
+    Axios.get("/refreshData").then(() => setRefresh(old => !old))
   }, [])
 
+  useEffect(() => {
+    fetch("/locations/", { method: 'GET' })
+      .then(response => response.json())
+      .then(data => setlocList(data.response))
+  }, [refresh])
 
   return (
     <div className={styles.App}>
@@ -44,7 +47,7 @@ function Refresh() {
                   <td>{val.last_updated}</td>
                 </tr>
               )
-              })}
+            })}
           </tbody>
         </table>
       </div>
