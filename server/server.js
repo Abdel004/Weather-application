@@ -40,7 +40,7 @@ app.post("/deleteLocation", adminLocationData.destroy)
 app.post("/newUser", adminUserData.register)
 app.get("/allUser", adminUserData.index)
 app.post("/updateUser", adminUserData.update)
-app.post("/deleteUser", adminUserData.destroy)
+app.delete("/deleteUser", adminUserData.destroy)
 
 //Functions in signIn File
 app.post('/signin-user/:role', signInandUp.signIn);

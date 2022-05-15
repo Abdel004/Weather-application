@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Map from "./components/Map";
 import MapLoc from "./components/MapLoc";
-import UserEdit from "./components/UserEdit";
+import Edit from "./components/Edit";
 import FavLocations from "./components/FavLocations";
 import LocationsTable from "./components/LocationsTable";
 
@@ -27,10 +27,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={userName && role === 'user' ? <Map /> : <LogIn createCookie={createCookie} />} />
-        <Route path="/login-admin" element={(userName && role === 'admin') ? <UserEdit /> : <AdminLogin createCookie={createCookie} />} />
+        <Route path="/login-admin" element={(userName && role === 'admin') ? <Edit /> : <AdminLogin createCookie={createCookie} />} />
         <Route path="/map" element={<Map />} />
         <Route path="/map/:name" element={<MapLoc />} />
-        <Route path="/user-edit" element={<UserEdit />} />
+        <Route path="/user-edit" element={<Edit />} />
         <Route path="/fav" element={<FavLocations username={userName} />}></Route>
         <Route path="/table" element={<LocationsTable />} />
       </Routes>

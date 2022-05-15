@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 // FOR USER DATA
 const User = require("./models/User");
 
@@ -6,123 +6,118 @@ const User = require("./models/User");
 //CREATE USER
 const register = (req, res, next) => {
 
-    if (req.body.password > 20 || req.body.password < 4) {
-        res.json({
+    if (req.body.password.length > 20 || req.body.password.length < 4) {
+        res.status(401).json({
             message: "password length should be between 4 and 20"
         })
-    }
-
-    if (req.body.username > 20 || req.body.username < 4) {
-        res.json({
+    } else if (req.body.username.length > 20 || req.body.username.length < 4) {
+        res.status(401).json({
             message: "username length should be between 4 and 20"
         })
+    } else {
+        bcrypt.hash(req.body.password, 10, function (err, hashedPass) {
+            if (err) {
+                res.status(401).json({
+                    error: err
+                })
+            }
+
+            let user = new User({
+                userName: req.body.username,
+                password: hashedPass,
+            })
+            user.save()
+                .then(user => {
+                    res.json({
+                        message: "User Added Successfully"
+                    })
+                })
+                .catch(error => {
+                    res.status(401).json({
+                        message: "An error occured"
+                    })
+                })
+        })
     }
 
-    bcrypt.hash(req.body.password, 10, function(err, hashedPass){
-        if(err) {
-            res.json({
-                error: err
-            })
-        }
 
-        let user = new User({
-            username: req.body.username,
-            password: hashedPass,
-        })
-    
-        user.save()
-        .then(user => {
-            res.json({
-                message: "User Added Successfully"
-            })
-        })
-        .catch(error =>{
-            res.json({
-                message: "An error occured"
-            })
-        })
-    })
 }
 
 // Show list of all users 
 const index = (req, res, next) => {
     User.find()
-    .then(response => {
-        res.json({
-            response
+        .then(response => {
+            res.json({
+                response
+            })
         })
-    })
-    .catch(error => {
-        res.json({
-            message: 'An error occured'
+        .catch(error => {
+            res.status(401).json({
+                message: 'An error occured'
+            })
         })
-    })
 }
-
-//Show particular user
-// const show = (req, res, next) => {
-//     let username = req.body.username
-//     User.find({usernmae:{$regex:username}},{username:1,password:1})
-//         .then(response => {
-//             const password = response[0].password;
-//             const username = response[0].username;
-//             //can display here
-//     })
-//         .catch(error => {
-//             res.json({
-//                 message: error.message
-//             })   
-//         })
-// };
-        
-
-
 
 //Update a user and store the information in database 
 const update = (req, res, next) => {
     let username = req.body.username
-    bcrypt.hash(req.body.password, 10, function(err, hashedPass){
-        if(err) {
-            res.json({
-                error: err
-            })
-        }
-        let updatedData = {
-            password: hashedPass
-        }
-        User.findOneAndUpdate({username:{$regex:username}}, {$set: updatedData})
-        
-        .then(() => {
-        res.json({   
-            message: 'User updated successfully!'
+    let oldUsername = req.body.olduser
+    if (req.body.password.length > 20 || req.body.password.length < 4) {
+        console.log("here")
+        res.status(401).json({
+            message: "password length should be between 4 and 20"
         })
-    })
-    .catch(error => {
-        res.json({
-            message: 'An error occured!'
+    } else if (req.body.username.length > 20 || req.body.username.length < 4) {
+        console.log("here1")
+        res.status(401).json({
+            message: "username length should be between 4 and 20"
         })
-    })
-    })
-         
+    } else {
+        bcrypt.hash(req.body.password, 10, function (err, hashedPass) {
+            if (err) {
+                res.status(401).json({
+                    error: err
+                })
+            }
+            let updatedData = {
+                userName: username,
+                password: hashedPass
+            }
+
+            User.findOneAndUpdate({ userName: oldUsername }, { $set: updatedData })
+                .then((respo) => {
+                    res.json({
+                        message: 'User updated successfully!'
+                    })
+                })
+                .catch(error => {
+                    res.status(401).json({
+                        message: 'An error occured!'
+                    })
+                })
+        })
+    }
+
+
 }
 
 
 //Delete a user 
-const destroy = (req,res,next) => {
+const destroy = (req, res, next) => {
     let username = req.body.username
-    User.findByIdAndRemove(username)
-    .then(() => {
-        res.json({
-            message: 'User Deleted Successfully'
+    User.findOneAndDelete({ userName: username })
+        .then(() => {
+            res.json({
+                message: 'User Deleted Successfully'
+            })
         })
-    })
-    .catch(error => {
-        res.json({
-            message: 'an error occured'
+        .catch(error => {
+            res.status(401).json({
+                message: 'an error occured'
+            })
         })
-    })
 }
 
 module.exports = {
-    register,index,update,destroy
+    register, index, update, destroy
 }
