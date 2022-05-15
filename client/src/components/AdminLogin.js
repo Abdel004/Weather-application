@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../css/login.css";
+import styles from "./login.module.css";
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -51,9 +51,9 @@ function AdminLogIn({ createCookie }) {
     }
 
     return (
-      <div className="form-container">
-        <div className="title-box"><h1>Weathering with Me</h1></div>
-          <div className="login-box">
+      <div className={styles.formcontainer}>
+        <div className={styles.titlebox}><h1>Weathering with Me</h1></div>
+          <div className={styles.loginbox}>
             <h1>ADMIN LOGIN</h1>
           </div>
 
@@ -84,7 +84,7 @@ function AdminLogIn({ createCookie }) {
                 <button type="submit" className="btn btn-primary btn-lg">Login</button>
 
             </form>
-            <div className="admin-box">
+            <div className={styles.adminbox}>
               <p>This page is for authorised access only.<br></br> If you are a user, please login <Link to="/">here</Link>.</p>
             </div>
 

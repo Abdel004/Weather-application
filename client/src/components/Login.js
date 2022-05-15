@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../css/login.css";
+import styles from "./login.module.css";
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -51,9 +51,9 @@ function LogIn({ createCookie }) {
     }
 
     return (
-        <div className="form-container">
-            <div className="title-box"><h1>Weathering with Me</h1></div>
-            <div className="login-box">
+        <div className={styles.formcontainer}>
+            <div className={styles.titlebox}><h1>Weathering with Me</h1></div>
+            <div className={styles.loginbox}>
                 <h1>USER LOGIN</h1>
             </div>
 
@@ -81,7 +81,7 @@ function LogIn({ createCookie }) {
                     {values.error && <p>{values.error}</p>}
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-lg">Login</button>
+                <button type="submit" className={`btn btn-primary btn-lg ${styles.btn}`}>Login</button>
 
             </form>
 

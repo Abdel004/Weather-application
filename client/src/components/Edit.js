@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import "../css/Edit.css";
+import styles from "./Edit.module.css";
 import axios from 'axios';
 
 
@@ -90,32 +90,32 @@ function Edit() {
       data: {
         username: username
       }
-    }).then( () => setRefresh((ref) => !ref))
+    }).then(() => setRefresh((ref) => !ref))
   }
 
   return (
-    <div className="App">
+    <div className={styles.App}>
       <h1> CRUD FOR USER </h1>
       <label> User Name</label>
-      <input type="text" value={values.username} name="username"
+      <input className={styles.put} type="text" value={values.username} name="username"
         onChange={(event) => { setValues(rest => { return ({ ...rest, [event.target.name]: event.target.value }) }) }} />
       <label> Password</label>
-      <input type="text" value={values.pwd} name="pwd"
+      <input className={styles.put} type="text" value={values.pwd} name="pwd"
         onChange={(event) => { setValues(rest => { return ({ ...rest, [event.target.name]: event.target.value }) }) }} />
-      {values.error && <p className='error'>{values.error}</p>}
-      <button onClick={addToList}>Create User</button>
+      {values.error && <p className={styles.error}>{values.error}</p>}
+      <button className={styles.btn}  onClick={addToList}>Create User</button>
       <h1> UserList</h1>
       {userList.map((val, key) => {
         return (
-          <div key={key} className="user">
+          <div key={key} className={styles.user}>
             <h1>{val.userName}</h1>
-            <input type="text" placeholder="New User Name" value={newValues.username} name="newUserName"
+            <input className={styles.put} type="text" placeholder="New User Name" value={newValues.username} name="newUserName"
               onChange={handleChange}></input>
-            <input type="text" placeholder="New Password" value={newValues.password} name="newPwd"
+            <input className={styles.put} type="text" placeholder="New Password" value={newValues.password} name="newPwd"
               onChange={handleChange}></input>
-            {newValues.oldUserName === val.userName && newValues.error && <p className='error'>{newValues.error}</p>}
-            <button onClick={() => updateUserName(val.userName)}> Update </button>
-            <button onClick={() => deleteUser(val.userName)}> Delete User</button>
+            {newValues.oldUserName === val.userName && newValues.error && <p className={styles.error}>{newValues.error}</p>}
+            <button className={styles.btn} onClick={() => updateUserName(val.userName)}> Update </button>
+            <button className={styles.btn}  onClick={() => deleteUser(val.userName)}> Delete User</button>
           </div>);
       })}
     </div>
