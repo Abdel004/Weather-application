@@ -56,6 +56,7 @@ function Register({ storeToken }) {
 
   }
 
+  //Register User
   function handleSubmit(event) {
     event.preventDefault();
 
