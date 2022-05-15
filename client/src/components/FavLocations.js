@@ -24,7 +24,7 @@ function FavLocations(props) {
             <td>{location.name}</td>
             <td>{location.temp_c}</td>
             <td>{location.humidity}</td>
-            <button type="button" className={`btn btn-primary btn-lg`} onClick={deleteLocation}>Delete</button>
+            <td><button type="button" className={`btn btn-primary`} onClick={deleteLocation}>Delete</button></td>
         </tr>
     );
 
