@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs')
 // FOR USER DATA
 const User = require("./models/User");
 
