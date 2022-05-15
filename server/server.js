@@ -24,20 +24,6 @@ mongoose.connect("mongodb+srv://stu110:p869132-@csci2720.m2qbq.mongodb.net/stu11
   }
 });
 
-
-
-
-
-// logout for admin and user
-app.get('/logout', (req, res) => {
-  res.clearCookie("user");
-  res.status(200).json({
-    success: true,
-    redirectUrl: '/login'
-  })
-});
-
-
 //Admin refresh data
 app.post("/newLocation", adminLocationData.register)
 app.get('/refreshData', adminRefresh.refreshData)

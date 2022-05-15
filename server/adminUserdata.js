@@ -4,6 +4,19 @@ const User = require("./models/User");
 
 //CREATE USER
 const register = (req, res, next) => {
+
+    if (req.body.password > 20 || req.body.password < 4) {
+        res.json({
+            message: "password length should be between 4 and 20"
+        })
+    }
+
+    if (req.body.username > 20 || req.body.username < 4) {
+        res.json({
+            message: "username length should be between 4 and 20"
+        })
+    }
+
     bcrypt.hash(req.body.password, 10, function(err, hashedPass){
         if(err) {
             res.json({
@@ -46,20 +59,20 @@ const index = (req, res, next) => {
 }
 
 //Show particular user
-const show = (req, res, next) => {
-    let username = req.body.username
-    User.find({usernmae:{$regex:username}},{username:1,password:1})
-        .then(response => {
-            const password = response[0].password;
-            const username = response[0].username;
-            //can display here
-    })
-        .catch(error => {
-            res.json({
-                message: error.message
-            })   
-        })
-};
+// const show = (req, res, next) => {
+//     let username = req.body.username
+//     User.find({usernmae:{$regex:username}},{username:1,password:1})
+//         .then(response => {
+//             const password = response[0].password;
+//             const username = response[0].username;
+//             //can display here
+//     })
+//         .catch(error => {
+//             res.json({
+//                 message: error.message
+//             })   
+//         })
+// };
         
 
 
@@ -110,5 +123,5 @@ const destroy = (req,res,next) => {
 }
 
 module.exports = {
-    register,index,show,update,destroy
+    register,index,update,destroy
 }

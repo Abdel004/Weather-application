@@ -25,6 +25,7 @@ function LogIn({ createCookie }) {
             }).then(
                 response => {
                     createCookie(response.data.message)
+                    fetch("/refreshData", { method: "GET" })
                     changeLoc()
                 },
                 error => {

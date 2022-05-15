@@ -12,6 +12,11 @@ function createCookie(res) {
   cookies.set('role', res.role)
 }
 
+function removeCookies(){
+  cookies.remove('userName')
+  cookies.remove('role')
+}
+
 function App() {
   let userName = cookies.get('userName')
   let role = cookies.get('role')
