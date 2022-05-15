@@ -1,0 +1,29 @@
+.commentcontainer {
+    width: 400px;
+}
+
+.commenthead {
+    color:white;
+}
+
+.commentbody {
+    color: black;
+    font-size: small;
+}
+
+.commentbox {
+    width: 400px;
+    border-radius: 25px;
+    margin-bottom: 5px;
+}
+
+.writecomment {
+    width: 400px;
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+
+.commentbutton {
+    float: right;
+    border-radius: 25px;
+}

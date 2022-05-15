@@ -1,0 +1,34 @@
+.SearchBar{
+  width: 30%;
+  height: 40px;
+  margin: 5px;
+}
+
+.search {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 30%;
+}
+
+.td, .th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.search tr:nth-child(even){background-color: #f2f2f2;}
+
+.search tr:hover {background-color: #ddd;}
+
+.th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #008CBA;
+  color: white;
+}
+
+.tr {
+  background-color: white;
+}
+
+
