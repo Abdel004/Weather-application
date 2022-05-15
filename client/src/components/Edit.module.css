@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
   display: flex;
@@ -13,14 +14,20 @@
   margin: 5px;
 }
 
-.user{
+/*.user{
   width: 500px;
-  height: 250px;
+  height: 200px;
   border: 2px solid black;
   margin: 10px;
 
-}
+}*/
 
 .error {
   color: red;
+}
+
+.space {
+  width: 4px;
+  height: auto;
+  display: inline-block;
 }
