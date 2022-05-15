@@ -20,11 +20,13 @@ function EditUser() {
   const [userList, setUserList] = useState([])
   const [refresh, setRefresh] = useState(false)
 
+  //Get all Users.
   useEffect(() => {
     axios.get(`/allUser`)
       .then((response) => setUserList(response.data.response))
   }, [refresh]);
 
+  //Add new Users.
   const addToList = () => {
     axios.post("/newUser", {
       username: values.username,
@@ -51,6 +53,7 @@ function EditUser() {
 
   }
 
+  //Update existing User.
   const updateUserName = (old) => {
     axios.post("/updateUser",
       {
@@ -85,6 +88,7 @@ function EditUser() {
     });
   }
 
+  //Delete existing User.
   const deleteUser = (username) => {
     axios.delete("/deleteUser", {
       data: {
