@@ -50,6 +50,8 @@ app.post('/signup-user', signInandUp.signUp);
 app.post('/keywordlocation', locFunctions.keywordLocation);
 app.get('/favourites/:name/:loc', locFunctions.addFavourites);
 app.get('/favourites/:userName', locFunctions.listFavourites);
+app.get('/delfavourites/:name/:loc',locFunctions.delFavourites);
+
 
 app.listen(5000, () => {
   console.log(`Connected to http://localhost:5000`)
