@@ -14,7 +14,7 @@ const getLocation = (req, res) => {
 
 // for google maps
 const getAllLocations = (req, res) => {
-  Location.find({}, { name: 1, latitude: 1, longitude: 1 })
+  Location.find({})
     .then(response => {
       res.json({ response })
     }).catch(err => {

@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function LocationsTable() {
     const [value, setValue] = useState([]);
     const [data, setData] = useState([]);
 
-    const getData = async() => {
-        const res = await fetch('/weather');
-        const response = await res.json();
-        setData(response);
-    };
-
     useEffect(() => {
-        getData();
-    });
-
-    const displayList = data.map((data) =>
-        <tr>
+        axios.get("/locations")
+        .then(response => response.data ? setData(response.data.response) : [])
+    }, []);
+    console.log(data)
+    const displayList = data.map((data, i) =>
+        <tr key={i}>
             <td>{data.name}</td>
             <td>{data.temp_c}</td>
             <td>{data.humidity}</td>

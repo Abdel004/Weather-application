@@ -1,9 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
-function FavLocations (props) {
-    const {username} = useParams();
-    const [location, setLocation] = useState();
+function FavLocations(props) {
+    // const {username} = useParams();
+    const [location, setLocation] = useState([]);
+
+    useEffect(() => {
+        axios.get(`/favourites/${props.username}`)
+            .then((response) => setLocation(response.data))
+    }, [props.username]);
+
+    const deleteLocation = (location) => {
+        fetch(`/favourites/${props.username}/${location}`) // needs to be modified
+            .then(res => res.json())
+            .then(res => console.log(res))
+            .then(window.location.reload())
+    }
+
 
     const displayFavs = location.map((location) =>
         <tr>
@@ -13,23 +26,6 @@ function FavLocations (props) {
             <button type="button" className="btn btn-primary btn-lg" onClick={deleteLocation}>Delete</button>
         </tr>
     );
-
-    const getLocation = async() => {
-        const res = await fetch('/locations/favLoc/${username}'); // needs to be modified
-        const response = await res.json();
-        setLocation(response);
-    };
-
-    useEffect(() => {
-        getLocation();
-    });
-
-    const deleteLocation = (location) => {
-        fetch('/locations/favLoc/${username}/${location}') // needs to be modified
-        .then(res => res.json())
-        .then(res => console.log(res))
-        .then(window.location.reload())
-    }
 
     return (
         <div className="container">

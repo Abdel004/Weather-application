@@ -12,7 +12,7 @@ function LogIn({ createCookie }) {
     });
 
     const changeLoc = () => {
-        navigate("/map") // add user view
+        navigate("/map", { replace: true }) // add user view
     }
 
     function handleSubmit(event) {

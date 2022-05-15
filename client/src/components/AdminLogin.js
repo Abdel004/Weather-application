@@ -12,7 +12,7 @@ function AdminLogIn({ createCookie }) {
     });
 
     const changeLoc = () => {
-        navigate("/map/london") // use admin view
+        navigate("/user-edit", { replace: true }) // use admin view
     }
 
     function handleSubmit(event) {

@@ -4,6 +4,9 @@ import Cookies from 'universal-cookie';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Map from "./components/Map";
 import MapLoc from "./components/MapLoc";
+import UserEdit from "./components/UserEdit";
+import FavLocations from "./components/FavLocations";
+import LocationsTable from "./components/LocationsTable";
 
 const cookies = new Cookies();
 
@@ -12,7 +15,7 @@ function createCookie(res) {
   cookies.set('role', res.role)
 }
 
-function removeCookies(){
+function removeCookies() {
   cookies.remove('userName')
   cookies.remove('role')
 }
@@ -23,10 +26,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={userName ? <Map /> : <LogIn createCookie={createCookie} />} />
-        <Route path="/login-admin" element={(userName && role && role === 'admin') ? <Map /> : <AdminLogin createCookie={createCookie} />} />
+        <Route path="/" element={userName && role === 'user' ? <Map /> : <LogIn createCookie={createCookie} />} />
+        <Route path="/login-admin" element={(userName && role === 'admin') ? <UserEdit /> : <AdminLogin createCookie={createCookie} />} />
         <Route path="/map" element={<Map />} />
         <Route path="/map/:name" element={<MapLoc />} />
+        <Route path="/user-edit" element={<UserEdit />} />
+        <Route path="/fav" element={<FavLocations username={userName} />}></Route>
+        <Route path="/table" element={<LocationsTable />} />
       </Routes>
     </BrowserRouter>
   );
