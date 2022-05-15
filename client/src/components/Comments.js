@@ -4,27 +4,37 @@ import styles from "./comments.module.css";
 
 function Comments(props) {
     const [comment, setComment] = useState([]);
-
+    const [newComment, setNewComment] = useState("");
+    const [refresh, setRefresh] = useState(false)
     useEffect(() => {
-        axios.get("/locations/${props.name}")
-            .then(response => response.comment ? setComment(response.comment.response) : [])
-    }, []);
+        axios.get(`/location/${props.name}`)
+            .then(response => response.data.response ? setComment(response.data.response.comments) : [])
+    }, [props.name, refresh]);
 
-    const addComment = (data) => {
-        axios.post("/newComment", 
-        {
-            userName: props.username,
-            values: data
-        }).then(res => console.log(res.json()))
+    const handleChange = (e) => {
+        const { value } = e.target
+        setNewComment(value)
+    }
+
+    const addComment = () => {
+        axios.post("/newComment",
+            {
+                name: props.name,
+                userName: props.userName,
+                comment: newComment
+            }).then(() => {
+                setRefresh(old => !old)
+                setNewComment("")
+            })
     }
 
     const displayComments = comment.map((comment, i) =>
         <div className={`card ${styles.commentbox}`} key={i}>
             <div className="card-body">
-                <h5 className="card-title">{comment.user}</h5>
-                <p className={`card-text ${styles.commentbody}`}>{comment.values}</p>
+                <h5 className="card-title">{comment.userName}</h5>
+                <p className={`card-text ${styles.commentbody}`}>{comment.comment}</p>
             </div>
-        </div>    
+        </div>
     );
 
     return (
@@ -32,22 +42,10 @@ function Comments(props) {
             <h3 className={styles.commenthead}>Comments</h3>
             <br></br>
             {displayComments}
-            {/* <div className={`card ${styles.commentbox}`} >
-                 <div className="card-body">
-                     <h5 className="card-title">User 1234</h5>
-                     <p className={`card-text ${styles.commentbody}`}>Hi There!</p>
-                 </div>
-            </div>    
-            <div className={`card ${styles.commentbox}`} >
-                 <div className="card-body">
-                     <h5 className="card-title">User 1234</h5>
-                     <p className={`card-text ${styles.commentbody}`}>Hi There!</p>
-                 </div>
-            </div> */}
             <div className="addcoment">
-                <textarea placeholder="Add a comment" className={styles.writecomment} rows={3} required></textarea>
+                <textarea placeholder="Add a comment" className={styles.writecomment} rows={3} value={newComment} required onChange={handleChange}></textarea>
                 <br></br>
-                <button type="submit" className={`btn btn-primary btn-lg ${styles.commentbutton}`} onClick={addComment}>Add Comment</button>
+                <button type="submit" className={`btn btn-primary btn-lg ${styles.commentbutton}`} onClick={() => addComment()}>Add Comment</button>
             </div>
         </div>
     )
