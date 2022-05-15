@@ -6,9 +6,9 @@ var App = React.createClass({
     return (
       
       <div id="menuwrapper">
-        <h4 style = {{textAlign: "right"}}> {this.props.username} | <button onClick={() => removeCookies() && <Link to ="/"></Link>}>Logout </button></h4>
-        <h1>Weather API <i className='fa-solid fa-cloud'/> </h1>
-        <ul>
+        <h4 className = "check" style = {{textAlign: "right"}}> {this.props.username} | <button onClick={() => removeCookies() && <Link to ="/"></Link>}>Logout </button></h4>
+        <h1 className = "check">Weather API <i className='fa-solid fa-cloud'/> </h1>
+        <ul className = "check">
           <li><IndexLink to="/" activeClassName="active">Data Requests</IndexLink></li>
           <li><Link to="/user" activeClassName="active">User CRUD</Link></li>
           <li><Link to="/loc" activeClassName="active">Location CRUD</Link></li>
