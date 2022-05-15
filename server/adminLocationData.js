@@ -102,6 +102,7 @@ const update = (req, res, next) => {
                 wind_dir: body.data.current.wind_dir,
                 humidity: body.data.current.humidity,
                 precip_mm: body.data.current.precip_mm,
+                comments: [],
                 vis_km: body.data.current.vis_km
             }
 
@@ -132,6 +133,7 @@ const update = (req, res, next) => {
                         wind_dir: body.data.current.wind_dir,
                         humidity: body.data.current.humidity,
                         precip_mm: body.data.current.precip_mm,
+                        comments: [],
                         vis_km: body.data.current.vis_km
                     }
 

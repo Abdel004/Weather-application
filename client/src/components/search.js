@@ -1,53 +1,56 @@
 
-import React,{useState, useEffect}  from 'react';
-import Axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styles from "./search.module.css";
 
 //Search Location with keyword
 function Search() {
   const [searchTerm, setSearchTerm] = useState("")
-  const[locationList, setLocations] = useState([])
+  const [locationList, setLocations] = useState([])
 
-  useEffect(()=>{
-    Axios.post("/keywordlocation").then((response)=>{
+  useEffect(() => {
+    axios.post("/keywordlocation", {
+      name: searchTerm
+    }).then((response) => {
       setLocations(response.data);
     })
-    },[])
+  }, [searchTerm])
 
 
   return (
     <div className="App">
-      <input type = "text" className = {styles.search} placeholder = "Search by Name..." onChange={e =>{
-        setSearchTerm(e.target.value);
-        }}
-        />
+      <input type="text" className={styles.search} placeholder="Search by Name..."
+        onChange={e => { setSearchTerm(e.target.value); }} />
 
-        <table className = {styles.search}> 
-        <tr>
-              <th> Location </th>
-              <th> Humidity </th>
-              <th> Temperature </th>
+      <table className={styles.search}>
+        <thead>
+          <tr >
+            <th className={styles.th} scope="col"> Location </th>
+            <th className={styles.th} scope="col"> Humidity </th>
+            <th className={styles.th} scope="col"> Temperature </th>
           </tr>
-          </table>
-      {locationList.filter((val) =>{
-        if (searchTerm === ""){
-          return val
-        }
-        else if (val.name.toLowerCase().includes(searchTerm.toLowerCase())){
-          return val
-        }
-      }).map((val,key) =>{ 
-        return (
-        <div className="user" key={key}>
-          <table className = {styles.search}>
-          <tr>
-          <td>{val.name} </td>
-          <td> {val.humidity} </td>
-          <td> {val.temp_c} </td>
-          </tr>
-          </table>
-          </div>)
-      })}
+        </thead>
+        <tbody>
+          {locationList.filter((val) => {
+            if (searchTerm === "") {
+              return val
+            }
+            else if (val.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+              return val
+            } else {
+              return null
+            }
+          }).map((val, key) => {
+            return (
+              <tr className={styles.tr}>
+                <td className={styles.td}>{val.name} </td>
+                <td className={styles.td}> {val.humidity} </td>
+                <td className={styles.td}> {val.temp_c} </td>
+              </tr>)
+          })}
+        </tbody>
+      </table>
+
     </div>
   );
 }

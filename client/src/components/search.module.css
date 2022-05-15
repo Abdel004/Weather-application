@@ -10,7 +10,7 @@
   width: 30%;
 }
 
-td, th {
+.td, .th {
   border: 1px solid #ddd;
   padding: 8px;
 }
@@ -19,7 +19,7 @@ td, th {
 
 .search tr:hover {background-color: #ddd;}
 
-th {
+.th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
@@ -27,5 +27,8 @@ th {
   color: white;
 }
 
+.tr {
+  background-color: white;
+}
 
 

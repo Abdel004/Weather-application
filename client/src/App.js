@@ -8,6 +8,7 @@ import EditUser from "./components/EditUser";
 import FavLocations from "./components/FavLocations";
 import LocationsTable from "./components/LocationsTable";
 import EditLocation from "./components/EditLocation";
+import Search from "./components/search";
 
 const cookies = new Cookies();
 
@@ -38,6 +39,7 @@ function App() {
         <Route path="/fav" element={<FavLocations username={userName} />}></Route>
         <Route path="/table" element={<LocationsTable />} />
         <Route path="/edit-location" element={<EditLocation />} />
+        <Route path="/search" element={<Search />} />
       </Routes>
     </BrowserRouter>
   );
