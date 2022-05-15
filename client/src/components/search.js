@@ -42,7 +42,7 @@ function Search() {
             }
           }).map((val, key) => {
             return (
-              <tr className={styles.tr}>
+              <tr className={styles.tr} key={key}>
                 <td className={styles.td}>{val.name} </td>
                 <td className={styles.td}> {val.humidity} </td>
                 <td className={styles.td}> {val.temp_c} </td>

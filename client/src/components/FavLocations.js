@@ -19,8 +19,8 @@ function FavLocations(props) {
     }
 
 
-    const displayFavs = location.map((location) =>
-        <tr>
+    const displayFavs = location.map((location, key) =>
+        <tr key={key}>
             <td>{location.name}</td>
             <td>{location.temp_c}</td>
             <td>{location.humidity}</td>
