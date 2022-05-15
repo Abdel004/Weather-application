@@ -18,14 +18,14 @@ function App() {
   const [locList, setlocList] = useState([])
   const [refresh, setRefresh] = useState(false)
 
-
+//Get all Locations
   useEffect(() => {
     axios.get("/allLocation").then((response) => {
       setlocList(response.data.response);
     })
   }, [refresh])
 
-
+//Add new Location 
   const addToList = () => {
     axios.post("/newLocation", {
       name: values.name,
@@ -53,6 +53,7 @@ function App() {
     )
   }
 
+ //Update existing Location
   const updateLocation = (old) => {
     axios.post("/updateLocation",
       {
@@ -75,6 +76,7 @@ function App() {
       )
   }
 
+  //Delete Location
   const deleteLoc = (name) => {
     axios.delete("/deleteLocation", {
       data: {
