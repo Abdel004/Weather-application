@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styles from "./login.module.css";
 
 function FavLocations(props) {
     // const {username} = useParams();
@@ -23,7 +24,7 @@ function FavLocations(props) {
             <td>{location.name}</td>
             <td>{location.temp_c}</td>
             <td>{location.humidity}</td>
-            <button type="button" className="btn btn-primary btn-lg" onClick={deleteLocation}>Delete</button>
+            <button type="button" className={`btn btn-primary btn-lg`} onClick={deleteLocation}>Delete</button>
         </tr>
     );
 
