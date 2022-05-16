@@ -87,7 +87,7 @@ function App() {
 
   return (
     <div className={styles.App}>    
-      <div className="h1 text-white mt-3 font-weight-bold">CRUD Operation for Location </div> 
+      <div className="h1 text-white mt-3 font-weight-bold">CRUD FOR LOCATION</div> 
       <div className="form-group w-25 mt-5">
         <div className="h3 text-white" for="example2">Location Name</div>
         <input className="form-control" type="text" value={values.name} name="name" onChange={(event) => { setValues(rest => { return ({ ...rest, [event.target.name]: event.target.value }) }) }} />
