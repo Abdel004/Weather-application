@@ -24,7 +24,7 @@ mongoose.connect("mongodb+srv://stu110:p869132-@csci2720.m2qbq.mongodb.net/stu11
   }
 });
 
-const PORT = 5000;
+const PORT = 80;
 app.use(express.static("build"));
 
 //Admin refresh data
