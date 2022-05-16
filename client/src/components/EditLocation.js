@@ -86,36 +86,59 @@ function App() {
   }
 
   return (
-    <div className={styles.App}>
-      <h1> CRUD FOR Location </h1>
-      <label>Location Name</label>
-      <input className={styles.put} type="text" value={values.name} name="name"
-        onChange={(event) => { setValues(rest => { return ({ ...rest, [event.target.name]: event.target.value }) }) }} />
-      <label> Latitude </label>
-      <input className={styles.put} type="number" value={values.latitude} name="latitude"
-        onChange={(event) => { setValues(rest => { return ({ ...rest, [event.target.name]: event.target.value }) }) }}
-      />
-      <label> Longitude</label>
-      <input className={styles.put} type="number" value={values.longitude} name="longitude"
-        onChange={(event) => { setValues(rest => { return ({ ...rest, [event.target.name]: event.target.value }) }) }} />
-      {values.error && <p className={styles.error}>{values.error}</p>}
-      <button className={styles.btn} onClick={addToList}>Create Location</button>
-      <h1> Location List</h1>
+    <div className={styles.App}>    
+      <div className="h1 text-white mt-3 font-weight-bold">CRUD Operation for Location </div> 
+      <div className="form-group w-25 mt-5">
+        <div className="h3 text-white" for="example2">Location Name</div>
+        <input className="form-control" type="text" value={values.name} name="name" onChange={(event) => { setValues(rest => { return ({ ...rest, [event.target.name]: event.target.value }) }) }} />
+      </div>
+      <div className="form-group w-25 mt-3">
+          <div className="h3 text-white" for="example2">Latitude</div>
+          <input className="form-control" type="number" value={values.latitude} name="latitude" onChange={(event) => { setValues(rest => { return ({ ...rest, [event.target.name]: event.target.value }) }) }}/>
+      </div>
+      <div className="form-group w-25 mt-3">
+          <div className="h3 text-white" for="example2">Longitude</div>
+          <input className="form-control"  type="number" value={values.longitude} name="longitude" onChange={(event) => { setValues(rest => { return ({ ...rest, [event.target.name]: event.target.value }) }) }} />
+      </div>
+        {values.error && <p className={styles.error}>{values.error}</p>}
+      <button className="btn btn-primary btn-lg mt-3 mb-5" onClick={addToList}>Create Location</button>
+      <div className='h1 text-white mb-4 font-weight-bold'>Location List</div> 
+      <div className="border border-white p-5 ">
       {locList.map((val, key) => {
         return (
           <div key={key} className={styles.user}>
-            <h1>{val.name}</h1> <h1>{val.latitude} </h1><h1>{val.longitude} </h1>
-            <input className={styles.put} type="text"  placeholder="New Location Name" name="name"
-              onChange={(event) => { setNewValues(rest => { return ({ ...rest, [event.target.name]: event.target.value }) }) }} />
-            <input className={styles.put} type="number" placeholder="New Latitude"  name="latitude"
-              onChange={(event) => { setNewValues(rest => { return ({ ...rest, [event.target.name]: event.target.value }) }) }}
-            />
-            <input className={styles.put} type="number" placeholder="New Longitude" name="longitude"
-              onChange={(event) => { setNewValues(rest => { return ({ ...rest, [event.target.name]: event.target.value }) }) }}></input>
-            <button className={styles.btn} onClick={() => updateLocation(val.name)}> Update Location</button>
-            <button className={styles.btn} onClick={() => deleteLoc(val.name)}> Delete Location</button>
-          </div>);
+            <div className="container d-flex justify-content-between">
+            
+             
+            
+            </div>
+            <div className="input-group mb-5 col-xs-2">
+            <div>
+                <div className='h6 text-white'>{val.name}</div> 
+                <input className="form-control-lg"  type="text"  placeholder="Update Location Name" name="name" onChange={(event) => { setNewValues(rest => { return ({ ...rest, [event.target.name]: event.target.value }) }) }} />
+            </div>
+            <div>
+                <div className='h6 text-white'>{val.latitude}{'\u00b0'}</div>
+                <input className="form-control-lg " type="number" placeholder="Update Latitude"  name="latitude" onChange={(event) => { setNewValues(rest => { return ({ ...rest, [event.target.name]: event.target.value }) }) }}/>  
+            </div>
+            <div>
+                <div className='h6 text-white'>{val.longitude}{'\u00b0'}</div>
+                <input className="form-control-lg " type="number" placeholder="Update Longitude" name="longitude" onChange={(event) => { setNewValues(rest => { return ({ ...rest, [event.target.name]: event.target.value }) }) }}></input>
+            </div>
+            <div className="d-inline mt-4">
+              <button className="btn btn-primary btn-lg" onClick={() => updateLocation(val.name)}> Update Location</button>
+            </div>
+      
+            
+            <div className="d-inline mt-4 ">
+            <button className="btn btn-secondary btn-lg" onClick={() => deleteLoc(val.name)}> Delete Location</button>
+            </div>
+         
+          </div>
+          </div>
+          );
       })}
+    </div>
     </div>
   );
 }
